@@ -1,3 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Calculadora de Temporada — rendimento Airbnb | Praia Digital</title><meta name="description" content="Calcule o rendimento anual de locação de temporada no litoral paulista: diária, ocupação, taxas e lucro líquido."><link rel="canonical" href="https://praia.digital/calculadora-temporada/"><style>body{font-family:system-ui,-apple-system,sans-serif;margin:0;background:#f8fafc;color:#0f172a;line-height:1.6}.hero{background:linear-gradient(135deg,#0c4a6e,#0ea5e9);color:#fff;padding:60px 20px;text-align:center}.container{max-width:780px;margin:auto;padding:30px 20px}.card{background:#fff;border-radius:13px;padding:24px;margin-bottom:16px;box-shadow:0 3px 10px #0001}label{display:block;font-weight:600;margin:12px 0 4px}input{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:1rem;box-sizing:border-box}button{background:#0ea5e9;color:#fff;border:0;padding:14px 28px;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;width:100%;margin-top:16px}.result{text-align:center}.big{font-size:2.2rem;font-weight:800;color:#0ea5e9}a.app{color:#0c4a6e;font-weight:600}footer{text-align:center;padding:24px;color:#64748b}</style></head><body><header class="hero"><h1>🧮 Calculadora de Temporada</h1><p>Quanto seu imóvel rende no Airbnb por ano? Descubra o lucro líquido real.</p></header><main class="container"><div class="card"><label>Diária média (R$)</label><input id="diaria" type="number" value="450"><label>Ocupação média (%)</label><input id="ocup" type="number" value="55"><label>Taxa da plataforma + gestão (%)</label><input id="taxa" type="number" value="18"><label>Custos mensais fixos (R$ — condomínio, IPTU, limpeza extra)</label><input id="custos" type="number" value="1200"><label>Valor do imóvel (R$, para yield)</label><input id="valor" type="number" value="600000"><button onclick="calc()">Calcular rendimento</button></div><div class="card result" id="out" style="display:none"></div><div class="card"><strong>Compare e otimize:</strong><br>💸 <a class="app" href="https://praia.digital/preco-justo/">Preço Justo</a> — sua diária está certa?<br>🌊 <a class="app" href="https://praia.digital/marea/">Maréa</a> — ocupação real por mês<br>📈 <a class="app" href="https://praia.digital/simulador-roi/">Simulador ROI</a> — cenários completos</div></main><footer><a class="app" href="https://praia.digital/apps/">🌐 Apps Praia Digital</a> · <a class="app" href="https://praia.digital/">praia.digital</a></footer><script>function calc(){var dia=+document.getElementById('diaria').value,oc=+document.getElementById('ocup').value/100,tx=+document.getElementById('taxa').value/100,cu=+document.getElementById('custos').value,v=+document.getElementById('valor').value;var bruto=dia*365*oc;var liq=bruto*(1-tx)-cu*12;var yield=(liq/v*100);document.getElementById('out').style.display='block';document.getElementById('out').innerHTML='<p>Receita bruta anual: <strong>R$ '+bruto.toLocaleString('pt-BR',{maximumFractionDigits:0})+'</strong></p><div class="big">R$ '+liq.toLocaleString('pt-BR',{maximumFractionDigits:0})+'</div><p>lucro líquido/ano</p><p>Yield bruto sobre o imóvel: <strong>'+yield.toFixed(1)+'% a.a.</strong> '+(yield>7?'🏆 Excelente!':yield>5?'✅ Bom':'⚠️ Considere otimizar preço/ocupação')+'</p>';}</script></body></html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Temporada — Rendimento de locação no litoral | Praia Digital</title>
+<meta name="description" content="Calcule o rendimento anual do seu imóvel em locação de temporada no litoral: diária, ocupação, custos e receita líquida.">
+<link rel="canonical" href="https://praia.digital/calculadora-temporada/">
+<style>:root{--azul:#0a2540;--mar:#0e7490;--areia:#f8f5ef}*{margin:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:var(--areia);color:#1e293b}header{background:linear-gradient(135deg,var(--azul),var(--mar));color:#fff;padding:2.5rem 1.5rem;text-align:center}.badge{display:inline-block;background:rgba(255,255,255,.15);padding:.25rem .8rem;border-radius:999px;font-size:.8rem;margin-bottom:.8rem}main{max-width:720px;margin:2rem auto;padding:0 1.25rem}.card{background:#fff;border-radius:1rem;padding:1.75rem;box-shadow:0 4px 24px rgba(10,37,64,.08);margin-bottom:1.5rem}label{display:block;font-weight:600;margin:1rem 0 .35rem}input,select{width:100%;padding:.7rem;border:1px solid #cbd5e1;border-radius:.5rem;font-size:1rem}button{width:100%;margin-top:1.4rem;background:var(--mar);color:#fff;border:0;padding:.9rem;font-size:1.05rem;font-weight:700;border-radius:.6rem;cursor:pointer}#out{display:none}.nums{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}.num{background:var(--areia);border-radius:.75rem;padding:1rem;text-align:center}.num b{display:block;font-size:1.35rem;color:var(--azul)}.num.lucro b{color:#16a34a}.rede{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem}.rede a{background:#fff;border:1px solid #e2e8f0;border-radius:.6rem;padding:.8rem;text-decoration:none;color:var(--azul);font-weight:600;font-size:.9rem}footer{text-align:center;padding:2rem;color:#64748b;font-size:.85rem}footer a{color:var(--mar)}</style>
+</head>
+<body>
+<header><span class="badge">🛰️ App satélite de <a href="https://praia.digital" style="color:#fff">praia.digital</a></span><h1>🧮 Calculadora de Temporada</h1><p>Quanto seu imóvel rende por ano no Airbnb?</p></header>
+<main>
+<div class="card">
+<label>Diária média (R$)</label><input id="diaria" type="number" value="450">
+<label>Ocupação média (%)</label><input id="oc" type="number" value="55" min="10" max="95">
+<label>Taxa da plataforma (%)</label><select id="taxa"><option value="15">Airbnb (15%)</option><option value="17">Booking (17%)</option><option value="5">Direto / próprio (5%)</option></select>
+<label>Custos mensais fixos (condomínio, IPTU, luz — R$)</label><input id="custos" type="number" value="900">
+<label>Limpeza por reserva (R$) / reservas por mês</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem"><input id="limp" type="number" value="150"><input id="resv" type="number" value="6"></div>
+<button onclick="calc()">Calcular rendimento</button>
+</div>
+<div class="card" id="out"><div class="nums">
+<div class="num"><b id="bruta"></b>Receita bruta/ano</div>
+<div class="num"><b id="liq" ></b>Receita líquida/ano</div>
+<div class="num"><b id="mensal"></b>Líquido médio/mês</div>
+<div class="num lucro"><b id="yield"></b>Yield sobre o imóvel*</div></div>
+<p style="margin-top:1rem;font-size:.85rem;color:#64748b">*Considerando imóvel de R$ 600 mil — ajuste no <a href="https://praia.digital/simulador-roi">Simulador ROI</a>. Melhore a diária com o <a href="https://praia.digital/preco-justo">Preço Justo</a>.</p></div>
+<h2 style="margin:1.5rem 0 .8rem">🌐 Rede Praia Digital</h2>
+<div class="rede">
+<a href="https://praia.digital">🏠 Portal Praia Digital</a>
+<a href="https://praia.digital/temporada-pro">⚙️ Temporada Pro</a>
+<a href="https://praia.digital/calendario-demanda">📅 Calendário de Demanda</a>
+<a href="https://praia.digital/checklist-anfitriao">✅ Checklist do Anfitrião</a>
+<a href="https://praia.digital/apps">🛰️ Todos os apps</a>
+</div>
+</main>
+<footer>Feito com 🌊 pela rede <a href="https://praia.digital">Praia Digital</a> · <a href="https://github.com/praiadigital/calculadora-temporada">código aberto no GitHub</a></footer>
+<script>
+const BRL=v=>'R$ '+Math.round(v).toLocaleString('pt-BR');
+function calc(){
+const d=+diaria.value||0,o=(+oc.value||55)/100,t=(+taxa.value)/100,c=+custos.value||0,l=(+limp.value||0)*(+resv.value||0);
+const bruta=d*365*o,liq=bruta*(1-t)-(c+l)*12;
+out.style.display='block';
+bruta.textContent?null:0;
+document.getElementById('bruta').textContent=BRL(bruta);
+document.getElementById('liq').textContent=BRL(liq);
+document.getElementById('mensal').textContent=BRL(liq/12);
+document.getElementById('yield').textContent=(liq/600000*100).toFixed(1)+'% a.a.';
+}
+</script>
+</body></html>
