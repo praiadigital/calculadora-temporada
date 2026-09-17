@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora de Temporada — quanto rende seu imóvel no litoral</title>
+<meta name="description" content="Calcule o rendimento mensal e anual de locação de temporada no litoral paulista. Satélite da rede praia.digital">
+<style>
+body{margin:0;font-family:system-ui,sans-serif;background:linear-gradient(180deg,#e0f2fe,#f0fdf4);color:#0c3547;min-height:100vh}
+header{padding:24px;text-align:center;background:linear-gradient(120deg,#0891b2,#06b6d4);color:#fff}
+nav a{color:#fde047;margin:0 8px;text-decoration:none;font-size:14px}
+.wrap{max-width:720px;margin:auto;padding:24px}
+.panel{background:#fff;border-radius:16px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.08);margin-bottom:18px}
+label{display:block;margin:12px 0 4px;font-weight:600}
+input,select{width:100%;padding:12px;border-radius:10px;border:2px solid #e0f2fe;font-size:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kpi{background:#ecfeff;border-radius:12px;padding:16px;text-align:center}
+.kpi b{display:block;font-size:26px;color:#0891b2}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+footer{padding:20px;text-align:center;font-size:13px}
+footer a{color:#0891b2}
+</style></head>
+<body>
+<header><h1>🧮 Calculadora de Temporada</h1><p>Quanto seu imóvel no litoral pode render por mês e por ano</p>
+<nav><a href="https://praia.digital">Praia Digital</a><a href="https://praia.digital/marea">Maréa</a><a href="https://praia.digital/simulador-roi">Simulador ROI</a><a href="https://praia.digital/apps">Todos os apps</a></nav></header>
+<div class="wrap"><div class="panel">
+<label>🏙️ Cidade</label><select id="cid" oninput="calc()"><option value="850">Santos</option><option value="900">Guarujá</option><option value="1200">São Sebastião</option><option value="500">Praia Grande</option><option value="600">Caraguatatuba</option></select>
+<div class="row"><div><label>💵 Diária média (R$)</label><input type="number" id="dia" value="850" oninput="calc()"></div>
+<div><label>📊 Ocupação mensal (%)</label><input type="number" id="ocup" value="35" oninput="calc()"></div></div>
+<div class="row"><div><label>🏷️ Taxa da plataforma (%)</label><input type="number" id="taxa" value="15" oninput="calc()"></div>
+<div><label>🧹 Limpeza por reserva (R$)</label><input type="number" id="limp" value="180" oninput="calc()"></div></div>
+<label>🏠 Valor do imóvel (R$)</label><input type="number" id="valor" value="600000" oninput="calc()">
+</div><div class="panel"><h2>Resultado</h2><div class="grid3" id="out"></div>
+<p id="dica" style="margin-top:14px"></p></div></div>
+<footer>Rede <a href="https://praia.digital">praia.digital</a> · <a href="https://praia.digital/ferramentas-airbnb">Ferramentas Airbnb</a> · <a href="https://praia.digital/area-anfitriao">Área do Anfitrião</a> · <a href="https://praia.digital/radar-precos">Radar de Preços</a></footer>
+<script>
+function fmt(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR')}
+function calc(){
+if(cid.value!==dia.value)dia.value=cid.value;
+const d=+dia.value,o=Math.min(100,+ocup.value)/100,t=+taxa.value/100,l=+limp.value,V=+valor.value||1;
+const diarias=30*o,reservas=diarias/3,bruto=diarias*d,liq=bruto*(1-t)+reservas*l-0;
+const liquidoPlataforma=bruto*(1-t);const limpezas=reservas*l;
+const mensal=liquidoPlataforma+limpezas*0.0;const anual=mensal*12;const yieldAnual=anual/V*100;
+out.innerHTML=`<div class="kpi"><b>${fmt(mensal)}</b>líquido/mês</div><div class="kpi"><b>${fmt(anual)}</b>líquido/ano</div><div class="kpi"><b>${yieldAnual.toFixed(1)}%</b>yield anual</div>`;
+const mesesAlta=4;
+const anualSazonal=mensal*8+bruto*2.8*(1-t)*mesesAlta;
+dica.innerHTML=`💡 Com a sazonalidade do <a href="https://praia.digital/marea">Maréa</a> (alta temporada x2.8 nos 4 meses de pico), seu ano pode chegar a <b>${fmt(anualSazonal)}</b>. Compare com renda fixa no <a href="https://praia.digital/investidores-litoral">Investidores Litoral</a>.`;
+}
+calc();
+</script></body></html>
